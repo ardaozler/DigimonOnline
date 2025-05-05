@@ -28,7 +28,7 @@ public class Digimon : MonoBehaviour
     private void Start()
     {
         _mover = GetComponent<Mover>();
-        _mover.SetMovementStrategy(new WalkMovement());
+        _mover.SetMovementStrategy(new TileWalkMovement());
     }
 
     private void Update()
@@ -42,7 +42,6 @@ public class Digimon : MonoBehaviour
                 //timer is bigger than min smaller than max time to make a decision maybe
                 if (Random.Range(0, 50) == 0)
                 {
-                    //TODO: boundary belirle
                     _mover.MoveTo(transform.position +
                                   new Vector3(Random.insideUnitCircle.x, 0f, Random.insideUnitCircle.y) *
                                   Random.Range(1f, 3f));
