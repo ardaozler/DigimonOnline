@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 using Random = UnityEngine.Random;
 
 /*
@@ -25,9 +26,12 @@ public class Digimon : MonoBehaviour
 
     private float _timer = 0f;
 
+    public Tilemap Tilemap; //change this to be set when the digimon is spawned
+
     private void Start()
     {
         _mover = GetComponent<Mover>();
+        _mover.tilemap = Tilemap;
         _mover.SetMovementStrategy(new TileWalkMovement());
     }
 
@@ -42,10 +46,12 @@ public class Digimon : MonoBehaviour
                 //timer is bigger than min smaller than max time to make a decision maybe
                 if (Random.Range(0, 50) == 0)
                 {
-                    _mover.MoveTo(transform.position +
-                                  new Vector3(Random.insideUnitCircle.x, 0f, Random.insideUnitCircle.y) *
-                                  Random.Range(1f, 3f));
-                    _timer = 0;
+                    //try to get a valid tile, if cant, retry next cycle(dont reset timer)
+                    if (_mover.MoveTo(transform.position + new Vector3(Random.insideUnitCircle.x, 0f,
+                            Random.insideUnitCircle.y * Random.Range(1f, 3f))))
+                    {
+                        _timer = 0;
+                    }
                 }
             }
             else
