@@ -39,9 +39,3 @@ public class DigimonAnimator : MonoBehaviour
         OnAnimationComplete?.Invoke(animationName);
     }
 }
-
-public class AnimationState
-{
-    public readonly string StateName;
-    
-}
