@@ -1,14 +1,19 @@
-﻿public class Urge
+﻿using UnityEngine;
+using UnityEngine.Serialization;
+
+public class Urge
 {
-    public string Name;
+    public string name;
     private float _tickSpeed;
     private float _percentage;
+    private DigimonAction[] _possibleActions;
 
-    public Urge(string name, float tickSpeed)
+    public Urge(string name, float tickSpeed, params DigimonAction[] possibleActions)
     {
-        Name = name;
+        this.name = name;
         _tickSpeed = tickSpeed;
         _percentage = 0;
+        _possibleActions = possibleActions;
     }
 
     public float Tick()
@@ -26,5 +31,25 @@
     public int GetUrgePercentage()
     {
         return (int)_percentage;
+    }
+
+    public static bool operator <(Urge urge, float value)
+    {
+        return urge._percentage < value;
+    }
+
+    public static bool operator >(Urge urge, float value)
+    {
+        return urge._percentage > value;
+    }
+
+    public static bool operator <(Urge first, Urge second)
+    {
+        return first._percentage < second._percentage;
+    }
+
+    public static bool operator >(Urge first, Urge second)
+    {
+        return first._percentage > second._percentage;
     }
 }

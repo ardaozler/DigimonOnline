@@ -1,8 +1,6 @@
-﻿using System.Runtime.InteropServices.WindowsRuntime;
-using TMPro;
-using UnityEngine;
-using UnityEngine.Serialization;
+﻿using UnityEngine;
 using UnityEngine.Tilemaps;
+using System;
 
 public class Mover : MonoBehaviour
 {
@@ -10,6 +8,9 @@ public class Mover : MonoBehaviour
     private IMovementStrategy _movementStrategy;
     private Vector3 _currentDestination;
     public Tilemap tilemap;
+    public event Action OnMovementStart;
+    public event Action OnMovementStop;
+
 
     public void SetMovementStrategy(IMovementStrategy strategy)
     {
@@ -20,9 +21,16 @@ public class Mover : MonoBehaviour
 
     void Update()
     {
-        if (_movementStrategy != null && Vector3.Distance(_currentDestination, transform.position) > 0.1f)
+        if (_movementStrategy != null)
         {
-            _movementStrategy.Move(transform, _currentDestination, moveSpeed);
+            if (Vector3.Distance(_currentDestination, transform.position) > 0.1f)
+            {
+                _movementStrategy.Move(transform, _currentDestination, moveSpeed);
+            }
+            else
+            {
+                OnMovementStop?.Invoke();
+            }
         }
     }
 
@@ -33,6 +41,7 @@ public class Mover : MonoBehaviour
 
         _currentDestination = tilemap.GetCellCenterWorld(cellPosition);
         _currentDestination.y = transform.position.y;
+        OnMovementStart?.Invoke();
         return true;
     }
 }

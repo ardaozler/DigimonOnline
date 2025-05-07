@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.Tilemaps;
 using Random = UnityEngine.Random;
 
@@ -17,20 +18,29 @@ Happiness
 [RequireComponent(typeof(Mover))]
 public class Digimon : MonoBehaviour
 {
-    private Urge _hunger = new Urge("Hunger", 0.5f),
+    public float maxDecisionWait;
+    public float minDecisionWait;
+    private float _timer = 0f;
+
+
+    private Urge _hunger = new Urge("Hunger", 0.5f, new SearchFood()),
         _cleanliness = new Urge("Cleanliness", 0.1f),
-        _happiness = new Urge("Happiness", 0.2f);
+        _happiness = new Urge("Happiness", 0.2f),
+        _content = new Urge("Content", 0); //doesnt want anything;
 
     private Urge[] _urges = new Urge[3];
+    private Urge _primaryUrge;
 
     private Mover _mover;
 
-    public float minDecisionWait;
-    public float maxDecisionWait;
+    [FormerlySerializedAs("_digimonAnimator")] [SerializeField]
+    private DigimonAnimator digimonAnimator;
 
-    private float _timer = 0f;
+    public Tilemap tilemap; //TODO: change this to be set when the digimon is spawned
 
-    public Tilemap tilemap; //change this to be set when the digimon is spawned
+    public int Hunger; //to be deleted
+    public int Happiness;
+    public int Cleanliness;
 
     private void Start()
     {
@@ -38,11 +48,14 @@ public class Digimon : MonoBehaviour
         _mover = GetComponent<Mover>();
         _mover.tilemap = tilemap;
         _mover.SetMovementStrategy(new TileWalkMovement());
+        _mover.OnMovementStart += () => { digimonAnimator.SetTrigger("IsMoving"); };
+        _mover.OnMovementStart += () => { digimonAnimator.SetTrigger("IsMoving"); };
 
         //urges
         _urges[0] = _hunger;
         _urges[1] = _cleanliness;
         _urges[2] = _happiness;
+        _primaryUrge = _content;
         InvokeRepeating(nameof(HandleUrges), 10, 5);
     }
 
@@ -74,9 +87,17 @@ public class Digimon : MonoBehaviour
 
     private void HandleUrges()
     {
+        _primaryUrge = _content;
         foreach (var urge in _urges)
         {
             urge.Tick();
+            if (urge < 50)
+            {
+                if (_primaryUrge == _content || _primaryUrge > urge)
+                {
+                    _primaryUrge = urge;
+                }
+            }
         }
     }
 }
