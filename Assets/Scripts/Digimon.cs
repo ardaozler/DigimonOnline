@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using Random = UnityEngine.Random;
@@ -18,7 +17,12 @@ Happiness
 [RequireComponent(typeof(Mover))]
 public class Digimon : MonoBehaviour
 {
-    private float _hunger, _cleanliness, _happiness; //0 to 1 will be scaled to 100
+    private Urge _hunger = new Urge("Hunger", 0.5f),
+        _cleanliness = new Urge("Cleanliness", 0.1f),
+        _happiness = new Urge("Happiness", 0.2f);
+
+    private Urge[] _urges = new Urge[3];
+
     private Mover _mover;
 
     public float minDecisionWait;
@@ -26,13 +30,20 @@ public class Digimon : MonoBehaviour
 
     private float _timer = 0f;
 
-    public Tilemap Tilemap; //change this to be set when the digimon is spawned
+    public Tilemap tilemap; //change this to be set when the digimon is spawned
 
     private void Start()
     {
+        //movement
         _mover = GetComponent<Mover>();
-        _mover.tilemap = Tilemap;
+        _mover.tilemap = tilemap;
         _mover.SetMovementStrategy(new TileWalkMovement());
+
+        //urges
+        _urges[0] = _hunger;
+        _urges[1] = _cleanliness;
+        _urges[2] = _happiness;
+        InvokeRepeating(nameof(HandleUrges), 10, 5);
     }
 
     private void Update()
@@ -58,6 +69,14 @@ public class Digimon : MonoBehaviour
             {
                 _timer = 0;
             }
+        }
+    }
+
+    private void HandleUrges()
+    {
+        foreach (var urge in _urges)
+        {
+            urge.Tick();
         }
     }
 }
