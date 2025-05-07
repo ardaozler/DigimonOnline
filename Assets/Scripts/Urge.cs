@@ -12,7 +12,7 @@ public class Urge
     {
         this.name = name;
         _tickSpeed = tickSpeed;
-        _percentage = 0;
+        _percentage = 100;
         _possibleActions = possibleActions;
     }
 

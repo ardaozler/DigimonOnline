@@ -56,7 +56,7 @@ public class Digimon : MonoBehaviour
         _urges[1] = _cleanliness;
         _urges[2] = _happiness;
         _primaryUrge = _content;
-        InvokeRepeating(nameof(HandleUrges), 10, 5);
+        InvokeRepeating(nameof(HandleUrges), 0, 0.5f);
     }
 
     private void Update()
@@ -99,5 +99,9 @@ public class Digimon : MonoBehaviour
                 }
             }
         }
+
+        Hunger = _hunger.GetUrgePercentage();
+        Cleanliness = _cleanliness.GetUrgePercentage();
+        Happiness = _happiness.GetUrgePercentage();
     }
 }
