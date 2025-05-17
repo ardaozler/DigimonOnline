@@ -48,7 +48,7 @@ public class Mover : MonoBehaviour
         _currentDestination = tilemap.GetCellCenterWorld(cellPosition);
         _currentDestination.y = transform.position.y;
         OnMovementStart?.Invoke();
-        onComplete?.Invoke();
+        OnMovementStop += () => { onComplete?.Invoke(); };
         return true;
     }
 }

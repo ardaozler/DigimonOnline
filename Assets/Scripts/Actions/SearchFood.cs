@@ -2,8 +2,16 @@
 
 public class SearchFood : DigimonAction
 {
-    public override bool Act(GameObject agent)
+    public override bool Act(ActContext actContext)
     {
+        if (actContext is not GameObjectContext context)
+        {
+            Debug.LogError("Invalid context for SearchFood action.");
+            return false;
+        }
+        
+        GameObject agent = context.Agent;
+        
         var mover = agent.GetComponent<Mover>();
         if (mover == null) return false;
 
@@ -27,7 +35,13 @@ public class SearchFood : DigimonAction
 
         if (nearest != null)
         {
-            return mover.MoveTo(nearest.transform.position);
+            return mover.MoveTo(nearest.transform.position, () =>
+            {
+                //TODO: on complete, digimon request action try eat edible
+                var edible = nearest.GetComponent<Edible>();
+                agent.GetComponent<Digimon>().RequestAction(new TryEatFood(),
+                    new TryEatContext(agent, edible));
+            });
         }
 
         return false;

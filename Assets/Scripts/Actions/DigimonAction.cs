@@ -2,9 +2,11 @@
 
 public abstract class DigimonAction
 {
-    public virtual bool Act(GameObject actor)
+    public bool IsBlocking = true;
+
+    public virtual bool Act(ActContext actContext)
     {
-        Debug.Log(actor.name + "acted");
+        Debug.Log(actContext + " acted");
         return true;
     }
 }

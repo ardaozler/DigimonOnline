@@ -2,9 +2,14 @@
 
 class AskForPets : DigimonAction
 {
-    public override bool Act(GameObject actor)
+    public override bool Act(ActContext actContext)
     {
-        
-        return base.Act(actor);
+        if (actContext is not GameObjectContext context)
+        {
+            Debug.LogError("Invalid context for AskForPets action.");
+            return false;
+        }
+
+        return base.Act(context);
     }
 }

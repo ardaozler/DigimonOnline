@@ -1,12 +1,13 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class Apple : Edible
 {
-    public override float SatiationPoint { get; set; }
+    public override int SatiationPoint { get; set; }
 
-    public override void Eat()
+    public override void Eat(Digimon owner, Action onFinishEating = null)
     {
-        base.Eat();
         Debug.Log("YOU ATE AN APPLE!");
+        base.Eat(owner, onFinishEating);
     }
 }
