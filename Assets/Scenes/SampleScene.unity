@@ -717,6 +717,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f7a0172289dfec42b4ebd7c33654668, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator: {fileID: 0}
 --- !u!1 &715592628
 GameObject:
   m_ObjectHideFlags: 0
@@ -726,8 +727,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 715592631}
-  - component: {fileID: 715592630}
   - component: {fileID: 715592629}
+  - component: {fileID: 715592630}
+  - component: {fileID: 715592635}
+  - component: {fileID: 715592634}
+  - component: {fileID: 715592633}
+  - component: {fileID: 715592632}
   m_Layer: 0
   m_Name: Agumon
   m_TagString: Untagged
@@ -747,13 +752,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e43d357ae325fa14cb06acc77f8ebeb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxDecisionWait: 3
-  minDecisionWait: 1
-  digimonAnimator: {fileID: 695014770}
-  tilemap: {fileID: 972152649}
-  Hunger: 0
-  Happiness: 0
-  Cleanliness: 0
 --- !u!114 &715592630
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -767,7 +765,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
-  tilemap: {fileID: 0}
+  tilemap: {fileID: 972152649}
 --- !u!4 &715592631
 Transform:
   m_ObjectHideFlags: 0
@@ -784,6 +782,60 @@ Transform:
   - {fileID: 1301108281}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &715592632
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 715592628}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f7a0172289dfec42b4ebd7c33654668, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 695014767}
+--- !u!114 &715592633
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 715592628}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5ed63fb8dd39764fb0a29ed2ffb5965, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Hunger: 0
+  Cleanliness: 0
+  Happiness: 0
+--- !u!114 &715592634
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 715592628}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44ea9a74339daca48a124e9dba4e6f95, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minDecisionWait: 3
+  maxDecisionWait: 5
+--- !u!114 &715592635
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 715592628}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f913c24ebc940e947a26058b9ace30af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0

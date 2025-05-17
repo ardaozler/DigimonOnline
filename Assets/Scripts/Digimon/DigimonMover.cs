@@ -2,7 +2,7 @@
 using UnityEngine.Tilemaps;
 using System;
 
-public class Mover : MonoBehaviour
+public class DigimonMover : MonoBehaviour
 {
     public float moveSpeed = 5f;
     private IMovementStrategy _movementStrategy;
@@ -10,6 +10,7 @@ public class Mover : MonoBehaviour
     public Tilemap tilemap;
     public event Action OnMovementStart;
     public event Action OnMovementStop;
+    private bool _isMoving;
 
 
     public void SetMovementStrategy(IMovementStrategy strategy)
@@ -29,7 +30,11 @@ public class Mover : MonoBehaviour
             }
             else
             {
-                OnMovementStop?.Invoke();
+                if (_isMoving)
+                {
+                    OnMovementStop?.Invoke();
+                    _isMoving = false;
+                }
             }
         }
     }
@@ -47,7 +52,12 @@ public class Mover : MonoBehaviour
 
         _currentDestination = tilemap.GetCellCenterWorld(cellPosition);
         _currentDestination.y = transform.position.y;
-        OnMovementStart?.Invoke();
+        if (!_isMoving)
+        {
+            OnMovementStart?.Invoke();
+            _isMoving = true;
+        }
+
         OnMovementStop += () => { onComplete?.Invoke(); };
         return true;
     }

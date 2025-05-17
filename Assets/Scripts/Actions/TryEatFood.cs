@@ -13,16 +13,13 @@ public class TryEatFood : DigimonAction
         GameObject agent = context.Agent;
         Edible edible = context.Edible;
 
-        if (edible.isBeingEaten)
+        if (edible.IsBeingEaten)
         {
             Debug.Log("Already being eaten");
             return false;
         }
-
         edible.Eat(agent.GetComponent<Digimon>());
         //TODO: animate eating and animate edible being eaten
-        edible.gameObject.SetActive(false);
-
         return true;
     }
 }

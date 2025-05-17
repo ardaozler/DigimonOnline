@@ -5,7 +5,7 @@ public class MoveAction : DigimonAction
     private float _minDecisionWait;
     private float _maxDecisionWait;
     private float _timer;
-    private Mover _mover;
+    private DigimonMover _digimonMover;
 
     public MoveAction(float minDecisionWait, float maxDecisionWait)
     {
@@ -24,12 +24,12 @@ public class MoveAction : DigimonAction
 
         var actor = context.Agent;
 
-        _mover = actor.GetComponent<Mover>();
+        _digimonMover = actor.GetComponent<DigimonMover>();
 
         if (Random.Range(0, 50) != 0) return false;
         var destination = actor.transform.position + new Vector3(Random.insideUnitCircle.x, 0f,
             Random.insideUnitCircle.y * Random.Range(1f, 3f));
-        _mover.MoveTo(destination);
+        _digimonMover.MoveTo(destination);
         _timer = 0;
         return true;
     }
