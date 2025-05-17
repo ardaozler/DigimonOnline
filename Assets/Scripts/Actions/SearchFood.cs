@@ -9,10 +9,10 @@ public class SearchFood : DigimonAction
             Debug.LogError("Invalid context for SearchFood action.");
             return false;
         }
-        
+
         GameObject agent = context.Agent;
-        
-        var mover = agent.GetComponent<Mover>();
+
+        var mover = agent.GetComponent<DigimonMover>();
         if (mover == null) return false;
 
         GameObject[] foodItems = GameObject.FindGameObjectsWithTag("Food");
@@ -37,10 +37,9 @@ public class SearchFood : DigimonAction
         {
             return mover.MoveTo(nearest.transform.position, () =>
             {
-                //TODO: on complete, digimon request action try eat edible
                 var edible = nearest.GetComponent<Edible>();
-                agent.GetComponent<Digimon>().RequestAction(new TryEatFood(),
-                    new TryEatContext(agent, edible));
+                var executor = agent.GetComponent<ActionExecutor>();
+                executor.Enqueue(new TryEatFood(), new TryEatContext(agent, edible));
             });
         }
 

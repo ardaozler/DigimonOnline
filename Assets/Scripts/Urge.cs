@@ -1,64 +1,53 @@
-﻿using UnityEngine;
-using UnityEngine.Serialization;
+﻿using System;
+using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class Urge
 {
-    public string name;
+    public string Name { get; }
     private float _tickSpeed;
     private float _percentage;
-    private DigimonAction[] _possibleActions;
+    private (DigimonAction Action, System.Func<ActContext> ContextProvider)[] _actions;
 
-    public Urge(string name, float tickSpeed, params DigimonAction[] possibleActions)
+    public Urge(string name, float tickSpeed, params (DigimonAction, System.Func<ActContext>)[] actions)
     {
-        this.name = name;
-        _tickSpeed = tickSpeed;
-        _percentage = 100;
-        _possibleActions = possibleActions;
+        Name = name;
+        _tickSpeed = Mathf.Max(0f, tickSpeed);
+        _percentage = 100f;
+        _actions = actions ?? Array.Empty<(DigimonAction, Func<ActContext>)>();
     }
-    
-    public DigimonAction GetPossibleAction()
-    {
-        if (_possibleActions.Length == 0)
-            return null;
 
-        int randomIndex = Random.Range(0, _possibleActions.Length);
-        return _possibleActions[randomIndex];
+    public (DigimonAction, ActContext)? GetActionWithContext()
+    {
+        if (_actions.Length == 0)
+            return null;
+        int i = Random.Range(0, _actions.Length);
+        var (action, contextFunc) = _actions[i];
+        var context = contextFunc();
+        if (context == null)
+            return null;
+        return (action, context);
     }
 
     public float Tick()
     {
-        _percentage -= _tickSpeed;
+        _percentage = Mathf.Clamp(_percentage - _tickSpeed, 0f, 100f);
         return _percentage;
     }
 
-    public float UpdatePercentage(float val)
+    public float UpdateValue(float value)
     {
-        _percentage += val;
+        _percentage = Mathf.Clamp(_percentage + value, 0f, 100f);
         return _percentage;
     }
 
     public int GetUrgePercentage()
     {
-        return (int)_percentage;
+        return Mathf.RoundToInt(_percentage);
     }
 
-    public static bool operator <(Urge urge, float value)
-    {
-        return urge._percentage < value;
-    }
-
-    public static bool operator >(Urge urge, float value)
-    {
-        return urge._percentage > value;
-    }
-
-    public static bool operator <(Urge first, Urge second)
-    {
-        return first._percentage < second._percentage;
-    }
-
-    public static bool operator >(Urge first, Urge second)
-    {
-        return first._percentage > second._percentage;
-    }
+    public static bool operator <(Urge a, float v) => a._percentage < v;
+    public static bool operator >(Urge a, float v) => a._percentage > v;
+    public static bool operator <(Urge a, Urge b) => a._percentage < b._percentage;
+    public static bool operator >(Urge a, Urge b) => a._percentage > b._percentage;
 }

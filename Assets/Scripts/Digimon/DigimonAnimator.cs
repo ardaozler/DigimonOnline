@@ -8,6 +8,18 @@ public class DigimonAnimator : MonoBehaviour
 
     public event Action<string> OnAnimationComplete;
 
+    [SerializeField] private Animator animator;
+
+    public void PlayWalkAnimation()
+    {
+        animator.SetTrigger("IsMoving");
+    }
+
+    public void PlayEatAnimation()
+    {
+        animator.SetTrigger("Eat");
+    }
+
     private void Awake()
     {
         _animator = GetComponent<Animator>();

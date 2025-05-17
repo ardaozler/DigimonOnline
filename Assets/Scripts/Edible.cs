@@ -4,28 +4,40 @@ using UnityEngine;
 
 public abstract class Edible : MonoBehaviour
 {
-    public bool isBeingEaten;
-    private Digimon _owner; //is the one eating
+    public bool IsBeingEaten { get; private set; }
+
     public abstract int SatiationPoint { get; set; }
 
-    public virtual void Eat(Digimon owner, Action onFinishEating = null)
-    {
-        isBeingEaten = true;
-        _owner = owner;
+    private Digimon _eater;
 
-        //some animation or effect here
-        StartCoroutine(Dispose(onFinishEating));
+    public virtual void Eat(Digimon eater, Action onFinishEating = null)
+    {
+        if (IsBeingEaten) return;
+
+        IsBeingEaten = true;
+        _eater = eater;
+
+        // Optionally trigger animation or effect here
+
+        StartCoroutine(HandleConsumption(onFinishEating));
     }
 
-    public virtual IEnumerator Dispose(Action onDispose)
+    protected virtual IEnumerator HandleConsumption(Action onFinishEating)
     {
-        yield return new WaitForSeconds(2);
+        Debug.Log("Starting to eat...");
+        yield return new WaitForSeconds(1f);
 
-        // Call the action to dispose of the object
-        onDispose?.Invoke();
-        _owner.Hunger -= SatiationPoint;
-        Debug.Log("YOUR HUNGER DROPPED BY" + SatiationPoint);
-        // Optionally, destroy the object after disposal
-        Destroy(gameObject);
+        Debug.Log("Finished eating!");
+
+        onFinishEating?.Invoke();
+
+        if (_eater != null)
+        {
+            // Reduce hunger, assuming it's exposed via property or method
+            _eater.GetComponent<DigimonStats>()?.UpdateUrge("Hunger", SatiationPoint);
+            Debug.Log($"Hunger reduced by {SatiationPoint} for {_eater.name}");
+        }
+
+        Destroy(gameObject, 0.5f);
     }
 }
