@@ -15,6 +15,15 @@ public class Urge
         _percentage = 100;
         _possibleActions = possibleActions;
     }
+    
+    public DigimonAction GetPossibleAction()
+    {
+        if (_possibleActions.Length == 0)
+            return null;
+
+        int randomIndex = Random.Range(0, _possibleActions.Length);
+        return _possibleActions[randomIndex];
+    }
 
     public float Tick()
     {

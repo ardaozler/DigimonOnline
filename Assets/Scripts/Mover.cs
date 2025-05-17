@@ -34,7 +34,13 @@ public class Mover : MonoBehaviour
         }
     }
 
-    public bool MoveTo(Vector3 position)
+    /// <summary>
+    /// return true if the requested position is valid and start the movement
+    /// </summary>
+    /// <param name="position"></param>
+    /// <param name="onComplete"></param>
+    /// <returns></returns>
+    public bool MoveTo(Vector3 position, Action onComplete = null)
     {
         Vector3Int cellPosition = tilemap.WorldToCell(position);
         if (!tilemap.HasTile(cellPosition)) return false;
@@ -42,6 +48,7 @@ public class Mover : MonoBehaviour
         _currentDestination = tilemap.GetCellCenterWorld(cellPosition);
         _currentDestination.y = transform.position.y;
         OnMovementStart?.Invoke();
+        onComplete?.Invoke();
         return true;
     }
 }

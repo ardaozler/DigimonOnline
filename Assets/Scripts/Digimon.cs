@@ -22,6 +22,8 @@ public class Digimon : MonoBehaviour
     public float minDecisionWait;
     private float _timer = 0f;
 
+    private MoveAction _moveAction;
+
 
     private Urge _hunger = new Urge("Hunger", 0.5f, new SearchFood()),
         _cleanliness = new Urge("Cleanliness", 0.1f),
@@ -47,9 +49,11 @@ public class Digimon : MonoBehaviour
         //movement
         _mover = GetComponent<Mover>();
         _mover.tilemap = tilemap;
-        _mover.SetMovementStrategy(new TileWalkMovement());
+        var movementStrategy = new TileWalkMovement(); // Injecting the strategy
+        _mover.SetMovementStrategy(movementStrategy);
         _mover.OnMovementStart += () => { digimonAnimator.SetTrigger("IsMoving"); };
-        _mover.OnMovementStart += () => { digimonAnimator.SetTrigger("IsMoving"); };
+
+        _moveAction = new MoveAction(minDecisionWait, maxDecisionWait);
 
         //urges
         _urges[0] = _hunger;
@@ -61,21 +65,16 @@ public class Digimon : MonoBehaviour
 
     private void Update()
     {
+        
         _timer += Time.deltaTime;
 
         if (_timer > minDecisionWait)
         {
             if (_timer < maxDecisionWait)
             {
-                //timer is bigger than min smaller than max time to make a decision maybe
-                if (Random.Range(0, 50) == 0)
+                if (_hunger.GetPossibleAction().Act(gameObject))
                 {
-                    //try to get a valid tile, if cant, retry next cycle(dont reset timer)
-                    if (_mover.MoveTo(transform.position + new Vector3(Random.insideUnitCircle.x, 0f,
-                            Random.insideUnitCircle.y * Random.Range(1f, 3f))))
-                    {
-                        _timer = 0;
-                    }
+                    _timer = 0;
                 }
             }
             else
@@ -83,6 +82,20 @@ public class Digimon : MonoBehaviour
                 _timer = 0;
             }
         }
+    }
+    
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        //HandleCompulsions();
+    }
+
+    /// <summary>
+    /// compulsions are actions that the digimon will do 
+    /// </summary>
+    /// <exception cref="NotImplementedException"></exception>
+    private void HandleCompulsions()
+    {
+        throw new System.NotImplementedException();
     }
 
     private void HandleUrges()
