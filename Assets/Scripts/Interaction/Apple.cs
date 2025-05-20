@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-public class Apple : Edible
+public class Apple : EdibleInteractable
 {
     public override int SatiationPoint { get; set; }
 
@@ -10,9 +10,9 @@ public class Apple : Edible
         SatiationPoint = 100; // Set the satiation point for the apple
     }
 
-    public override void Eat(Digimon owner, Action onFinishEating = null)
+    public override bool Interact(InteractContext interactContext)
     {
-        Debug.Log("YOU ATE AN APPLE!");
-        base.Eat(owner, onFinishEating);
+        Debug.Log("YOU ATE AN APPLE!(maybe failed idk)");
+        return base.Interact(interactContext);
     }
 }

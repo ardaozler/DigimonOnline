@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-public abstract class Edible : MonoBehaviour
+public abstract class EdibleInteractable : DigimonInteractable
 {
     public bool IsBeingEaten { get; private set; }
 
@@ -10,16 +10,28 @@ public abstract class Edible : MonoBehaviour
 
     private Digimon _eater;
 
-    public virtual void Eat(Digimon eater, Action onFinishEating = null)
+    public override InteractContext GetContext(GameObject agent)
     {
-        if (IsBeingEaten) return;
+        return new EdibleInteractContext(agent);
+    }
+
+    public override bool Interact(InteractContext interactContext)
+    {
+        if (interactContext is not EdibleInteractContext edibleContext)
+        {
+            Debug.LogError("Invalid context for Edible interaction.");
+            return false;
+        }
+
+        if (IsBeingEaten) return false;
 
         IsBeingEaten = true;
-        _eater = eater;
+        _eater = edibleContext.Agent.GetComponent<Digimon>();
 
         // Optionally trigger animation or effect here
 
-        StartCoroutine(HandleConsumption(onFinishEating));
+        StartCoroutine(HandleConsumption(edibleContext.OnFinishEating));
+        return true;
     }
 
     protected virtual IEnumerator HandleConsumption(Action onFinishEating)

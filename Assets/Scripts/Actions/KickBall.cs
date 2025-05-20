@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-class AskForPets : DigimonAction
+class KickBall : DigimonAction
 {
     public override bool Act(ActContext actContext)
     {
@@ -9,6 +9,9 @@ class AskForPets : DigimonAction
             Debug.LogError("Invalid context for AskForPets action.");
             return false;
         }
+        GameObject agent = context.Agent;
+        
+        
 
         return base.Act(context);
     }

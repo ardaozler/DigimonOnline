@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class SearchFood : DigimonAction
+public class SearchBall : DigimonAction
 {
     public override bool Act(ActContext actContext)
     {
@@ -37,7 +37,7 @@ public class SearchFood : DigimonAction
         {
             return mover.MoveTo(nearest.transform.position, () =>
             {
-                var edible = nearest.GetComponent<Edible>();
+                var edible = nearest.GetComponent<EdibleInteractable>();
                 var executor = agent.GetComponent<ActionExecutor>();
                 executor.Enqueue(new TryEatFood(), new TryEatContext(agent, edible));
             });
