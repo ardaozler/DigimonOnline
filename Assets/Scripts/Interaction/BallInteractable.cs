@@ -13,7 +13,7 @@ public class BallInteractable : DigimonInteractable
 
         return new BallInteractContext(agent, ball);
     }
-    
+
     public override bool Interact(InteractContext interactContext)
     {
         if (interactContext is not BallInteractContext context)
@@ -26,10 +26,15 @@ public class BallInteractable : DigimonInteractable
         Ball ball = context.Ball;
 
         Debug.Log($"{agent.name} kicked the ball!");
+        agent.GetComponent<DigimonStats>().UpdateUrge("Happiness", 50f);
 
+        var direction = (ball.transform.position - agent.transform.position);
+        direction.y = 0; // Keep the direction horizontal
+        direction.Normalize();
 
-        var ballDestination = ball.transform.position + new Vector3(Random.insideUnitCircle.x, 0f,
-            Random.insideUnitCircle.y * Random.Range(1f, 3f));
+        Debug.Log("direction   " + direction);
+
+        var ballDestination = ball.transform.position + direction * Random.Range(2f, 3f);
         return ball.MoveTo(ballDestination);
     }
 }

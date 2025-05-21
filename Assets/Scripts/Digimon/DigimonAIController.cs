@@ -35,7 +35,9 @@ public class DigimonAIController : MonoBehaviour
         }
 
         if (_timer >= maxDecisionWait)
+        {
             _timer = 0;
+        }
     }
 
     private void TryActOnUrge()
@@ -45,7 +47,7 @@ public class DigimonAIController : MonoBehaviour
         {
             var (action, context) = d;
             _executor.Enqueue(action, context);
-            Debug.Log("tryactonurge");
+            Debug.Log(_primaryUrge.Name + "urge action queued");
         }
     }
 
