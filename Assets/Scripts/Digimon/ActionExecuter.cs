@@ -8,6 +8,7 @@ public class ActionExecutor : MonoBehaviour
 
     public void Enqueue(DigimonAction action, ActContext context)
     {
+        DebugActQueueUI.Instance.AddActionText(action.GetType().Name);
         _queue.Enqueue((action, context));
     }
 
@@ -16,6 +17,13 @@ public class ActionExecutor : MonoBehaviour
         if (_queue.Count == 0) return false;
 
         var (action, context) = _queue.Dequeue();
+        DebugActQueueUI.Instance.RemoveLastActionText();
         return action.Act(context);
+    }
+    
+    public (DigimonAction,ActContext) PeekNext()
+    {
+        if (_queue.Count == 0) return (null, null);
+        return _queue.Peek();
     }
 }

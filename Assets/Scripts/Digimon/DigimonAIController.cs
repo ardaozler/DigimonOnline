@@ -43,11 +43,13 @@ public class DigimonAIController : MonoBehaviour
     private void TryActOnUrge()
     {
         var decision = _primaryUrge.GetActionWithContext();
-        if (decision is { } d)
+        if (decision != null)
         {
-            var (action, context) = d;
-            _executor.Enqueue(action, context);
-            Debug.Log(_primaryUrge.Name + "urge action queued");
+            var (action, context) = decision.Value;
+            if (_executor.PeekNext() != (action, context))
+            {
+                _executor.Enqueue(action, context);
+            }
         }
     }
 
