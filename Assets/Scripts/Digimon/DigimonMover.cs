@@ -9,7 +9,8 @@ public class DigimonMover : MonoBehaviour
     private Vector3 _currentDestination;
     public Tilemap tilemap;
     public event Action OnMovementStart;
-    public event Action OnMovementStop;
+    private Action _onMovementComplete;
+    
     private bool _isMoving;
 
 
@@ -32,8 +33,10 @@ public class DigimonMover : MonoBehaviour
             {
                 if (_isMoving)
                 {
-                    OnMovementStop?.Invoke();
                     _isMoving = false;
+
+                    _onMovementComplete?.Invoke();
+                    _onMovementComplete = null;
                 }
             }
         }
@@ -52,13 +55,16 @@ public class DigimonMover : MonoBehaviour
 
         _currentDestination = tilemap.GetCellCenterWorld(cellPosition);
         _currentDestination.y = transform.position.y;
+
+        _onMovementComplete = onComplete;
+
         if (!_isMoving)
         {
             OnMovementStart?.Invoke();
             _isMoving = true;
         }
 
-        OnMovementStop += () => { onComplete?.Invoke(); };
         return true;
     }
+
 }
