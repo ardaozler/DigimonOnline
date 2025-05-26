@@ -48,6 +48,8 @@ public class DigimonAIController : MonoBehaviour
             var (action, context) = decision.Value;
             if (_executor.PeekNext() != (action, context))
             {
+                Debug.Log(
+                    $"Enqueuing action: {action.GetType().Name} for urge: {_primaryUrge.Name}, action count in queue: {_executor.GetQueueCount()}");
                 _executor.Enqueue(action, context);
             }
         }

@@ -22,13 +22,6 @@ public class DebugActQueueUI : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
-
-    private void Update()
-    {
-        
-    }
-    
     public void AddActionText(string text)
     {
         var actText = Instantiate(actTextPrefab, actsContainer.transform);

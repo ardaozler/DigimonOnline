@@ -26,4 +26,9 @@ public class ActionExecutor : MonoBehaviour
         if (_queue.Count == 0) return (null, null);
         return _queue.Peek();
     }
+    
+    public int GetQueueCount()
+    {
+        return _queue.Count;
+    }
 }

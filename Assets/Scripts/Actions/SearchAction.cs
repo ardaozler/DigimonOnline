@@ -37,11 +37,29 @@ public class SearchAction : DigimonAction
         {
             return mover.MoveTo(nearest.transform.position, () =>
             {
-                var interactable = nearest.GetComponent<DigimonInteractable>();
-                var context = interactable.GetContext(agent);
+                if (nearest == null)
+                {
+                    Debug.LogWarning("No valid interactable found. Maybe already destroyed.");
+                    return;
+                }
 
+
+                var interactable = nearest.GetComponent<DigimonInteractable>();
+                var interactContext = interactable.GetContext(agent);
                 var executor = agent.GetComponent<ActionExecutor>();
-                executor.Enqueue(new InteractWithTarget(), new GenericInteractContext(interactable, context));
+
+                if (Vector3.Distance(agent.transform.position, nearest.transform.position) >
+                    DigimonInteractable.INTERACTABLE_RADIUS)
+                {
+                    executor.Enqueue(new SearchAction(), new SearchContext(agent, context.SearchTag));
+                    Debug.Log("moveto ended and search is queued");
+                }
+                else
+                {
+                    Debug.Log("moveto ended and interact is queued");
+                    executor.Enqueue(new InteractWithTarget(),
+                        new GenericInteractContext(interactable, interactContext));
+                }
             });
         }
 
