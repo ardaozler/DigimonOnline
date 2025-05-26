@@ -1,8 +1,9 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class TryEatFood : DigimonAction
 {
-    public override bool Act(ActContext actContext)
+    public override bool Act(ActContext actContext, Action onActionCompleted)
     {
         if (actContext is not TryEatContext context)
         {
@@ -19,7 +20,7 @@ public class TryEatFood : DigimonAction
             return false;
         }
 
-        edibleInteractable.Interact(new EdibleInteractContext(agent));
+        edibleInteractable.Interact(new EdibleInteractContext(agent), () => { });
         //TODO: animate eating and animate edible being eaten
         return true;
     }

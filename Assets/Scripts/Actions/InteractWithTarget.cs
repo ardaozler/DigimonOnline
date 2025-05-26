@@ -1,8 +1,9 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class InteractWithTarget : DigimonAction
 {
-    public override bool Act(ActContext actContext)
+    public override bool Act(ActContext actContext, Action onActionCompleted)
     {
         if (actContext is not GenericInteractContext context)
         {
@@ -10,6 +11,6 @@ public class InteractWithTarget : DigimonAction
             return false;
         }
 
-        return context.Target.Interact(context.Context);
+        return context.Target.Interact(context.Context, onActionCompleted);
     }
 }

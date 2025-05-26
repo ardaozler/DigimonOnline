@@ -1519,7 +1519,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &715592629
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3179,7 +3179,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44ea9a74339daca48a124e9dba4e6f95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minDecisionWait: 2
+  minDecisionWait: 1
   maxDecisionWait: 3
 --- !u!114 &1081459945
 MonoBehaviour:

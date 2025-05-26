@@ -20,11 +20,9 @@ public class BallInteractContext : InteractContext
 public class EdibleInteractContext : InteractContext
 {
     public GameObject Agent;
-    public readonly Action OnFinishEating;
 
-    public EdibleInteractContext(GameObject agent, Action onFinishEating = null)
+    public EdibleInteractContext(GameObject agent)
     {
         Agent = agent;
-        this.OnFinishEating = onFinishEating;
     }
 }

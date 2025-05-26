@@ -10,9 +10,14 @@ public class Apple : EdibleInteractable
         SatiationPoint = 100; // Set the satiation point for the apple
     }
 
-    public override bool Interact(InteractContext interactContext)
+    public override bool Interact(InteractContext interactContext, Action onInteractionCompleted = null)
     {
-        Debug.Log("YOU ATE AN APPLE!(maybe failed idk)");
-        return base.Interact(interactContext);
+        if (interactContext is not EdibleInteractContext edibleContext)
+        {
+            Debug.LogError("Invalid context for Apple interaction.");
+            return false;
+        }
+
+        return base.Interact(interactContext, onInteractionCompleted);
     }
 }

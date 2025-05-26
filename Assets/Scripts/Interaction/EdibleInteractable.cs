@@ -15,22 +15,23 @@ public abstract class EdibleInteractable : DigimonInteractable
         return new EdibleInteractContext(agent);
     }
 
-    public override bool Interact(InteractContext interactContext)
+    public override bool Interact(InteractContext interactContext, Action onInteractionCompleted)
     {
         if (interactContext is not EdibleInteractContext edibleContext)
         {
             Debug.LogError("Invalid context for Edible interaction.");
             return false;
         }
-
+        
         if (IsBeingEaten) return false;
-
+        
+        
         IsBeingEaten = true;
         _eater = edibleContext.Agent.GetComponent<Digimon>();
 
         // Optionally trigger animation or effect here
 
-        StartCoroutine(HandleConsumption(edibleContext.OnFinishEating));
+        StartCoroutine(HandleConsumption(onInteractionCompleted));
         return true;
     }
 

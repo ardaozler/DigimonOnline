@@ -1,8 +1,9 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class SearchAction : DigimonAction
 {
-    public override bool Act(ActContext actContext)
+    public override bool Act(ActContext actContext, Action onActionCompleted)
     {
         if (actContext is not SearchContext context)
         {
@@ -37,6 +38,8 @@ public class SearchAction : DigimonAction
         {
             return mover.MoveTo(nearest.transform.position, () =>
             {
+                onActionCompleted?.Invoke();
+
                 if (nearest == null)
                 {
                     Debug.LogWarning("No valid interactable found. Maybe already destroyed.");

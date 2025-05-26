@@ -16,17 +16,20 @@ public class ActionExecutor : MonoBehaviour
     {
         if (_queue.Count == 0) return false;
 
-        var (action, context) = _queue.Dequeue();
-        DebugActQueueUI.Instance.RemoveLastActionText();
-        return action.Act(context);
+        var (action, context) = _queue.Peek();
+        return action.Act(context, () =>
+        {
+            DebugActQueueUI.Instance.RemoveLastActionText();
+            _queue.Dequeue();
+        });
     }
-    
-    public (DigimonAction,ActContext) PeekNext()
+
+    public (DigimonAction, ActContext) PeekNext()
     {
         if (_queue.Count == 0) return (null, null);
         return _queue.Peek();
     }
-    
+
     public int GetQueueCount()
     {
         return _queue.Count;

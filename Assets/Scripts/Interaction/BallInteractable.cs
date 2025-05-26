@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class BallInteractable : DigimonInteractable
 {
@@ -14,7 +16,7 @@ public class BallInteractable : DigimonInteractable
         return new BallInteractContext(agent, ball);
     }
 
-    public override bool Interact(InteractContext interactContext)
+    public override bool Interact(InteractContext interactContext, Action onInteractionCompleted)
     {
         if (interactContext is not BallInteractContext context)
         {
@@ -32,7 +34,7 @@ public class BallInteractable : DigimonInteractable
         direction.y = 0; // Keep the direction horizontal
         direction.Normalize();
 
-        Debug.Log("direction   " + direction);
+        onInteractionCompleted?.Invoke();
 
         var ballDestination = ball.transform.position + direction * Random.Range(2f, 3f);
         return ball.MoveTo(ballDestination);
