@@ -10,6 +10,5 @@ public class ButtonOnMouseDrag : MonoBehaviour,IBeginDragHandler
     public void OnBeginDrag(PointerEventData eventData)
     {
         onMouseDragEvent?.Invoke();
-        Debug.Log("hi");
     }
 }

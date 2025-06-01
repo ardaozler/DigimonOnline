@@ -14,9 +14,9 @@ public class DigimonStats : MonoBehaviour
 
     public void InitializeUrges(GameObject owner)
     {
-        _hunger = new Urge("Hunger", 1f, (new SearchAction(), () => new SearchContext(owner, "Food")));
+        _hunger = new Urge("Hunger", 0.1f, (new SearchAction(), () => new SearchContext(owner, "Food")));
         _cleanliness = new Urge("Cleanliness", 0.1f);
-        _happiness = new Urge("Happiness", 2f, (new SearchAction(), () => new SearchContext(owner, "Ball")));
+        _happiness = new Urge("Happiness", 6f, (new SearchAction(), () => new SearchContext(owner, "Ball")));
     }
 
     public void UpdateUrge(string name, float amount)

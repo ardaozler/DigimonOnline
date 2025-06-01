@@ -7,15 +7,23 @@ public class ObjectSpawner : MonoBehaviour
     public GameObject ballPrefab;
     public GameObject foodPrefab;
     public Tilemap tilemap;
+    public float zDepth = 5f;
 
 
     public void SpawnBallOnMouse()
     {
+        SpawnBall(GetMouseWorldPoint());
+    }
+
+    private Vector3 GetMouseWorldPoint()
+    {
+
         Vector3 mouseWorldPoint = Camera.main.ScreenToWorldPoint(
-            new Vector3(Input.mousePosition.x, Input.mousePosition.y,
-                Camera.main.WorldToScreenPoint(transform.position).z)
+            new Vector3(Input.mousePosition.x, Input.mousePosition.y, zDepth)
         );
-        SpawnBall(mouseWorldPoint);
+        
+        mouseWorldPoint.y = DragAndDrop.FixedY;
+        return mouseWorldPoint;
     }
 
     private void SpawnBall(Vector3 position)
@@ -35,11 +43,7 @@ public class ObjectSpawner : MonoBehaviour
 
     public void SpawnFoodOnMouse()
     {
-        Vector3 mouseWorldPoint = Camera.main.ScreenToWorldPoint(
-            new Vector3(Input.mousePosition.x, Input.mousePosition.y,
-                Camera.main.WorldToScreenPoint(transform.position).z)
-        );
-        SpawnFood(mouseWorldPoint);
+        SpawnFood(GetMouseWorldPoint());
     }
 
     private void SpawnFood(Vector3 position)

@@ -4,7 +4,7 @@ using UnityEngine;
 public class DragAndDrop : MonoBehaviour
 {
     private Vector3 _offset;
-    private const float FixedY = 1.226f;
+    public static readonly float FixedY = 1.226f;
     private Vector3 _originalScale;
     private bool _forceDrag = false;
 
