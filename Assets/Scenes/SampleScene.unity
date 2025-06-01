@@ -458,7 +458,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Apple
+  m_text: 'Food
 
 '
   m_isRightToLeft: 0
@@ -3550,7 +3550,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1753512919736480276, guid: b57f97284c264aa4a8b84d126710333b, type: 3}
       propertyPath: m_Name
-      value: Apple (1)
+      value: Food (1)
       objectReference: {fileID: 0}
     - target: {fileID: 1753512919736480276, guid: b57f97284c264aa4a8b84d126710333b, type: 3}
       propertyPath: m_IsActive
@@ -3601,131 +3601,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b57f97284c264aa4a8b84d126710333b, type: 3}
---- !u!1 &1411862901
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1411862906}
-  - component: {fileID: 1411862905}
-  - component: {fileID: 1411862904}
-  - component: {fileID: 1411862903}
-  - component: {fileID: 1411862902}
-  m_Layer: 0
-  m_Name: Capsule
-  m_TagString: Ball
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1411862902
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1411862901}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 69e2a5bea1174bff97d0e838fa2a6cdf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Speed: 10
-  tilemap: {fileID: 972152649}
---- !u!136 &1411862903
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1411862901}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!23 &1411862904
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1411862901}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RayTracingAccelStructBuildFlagsOverride: 0
-  m_RayTracingAccelStructBuildFlags: 1
-  m_SmallMeshCulling: 1
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
---- !u!33 &1411862905
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1411862901}
-  m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
---- !u!4 &1411862906
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1411862901}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1556732387
 GameObject:
   m_ObjectHideFlags: 0
@@ -3771,6 +3646,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1597261763}
+  - component: {fileID: 1597261764}
   m_Layer: 0
   m_Name: ObjectSpawner
   m_TagString: Untagged
@@ -3793,6 +3669,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1597261764
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1597261762}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07970cddb87da804b9c6fe56753a5d1c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ballPrefab: {fileID: 6517003414070354408, guid: 9952f0d1502f4b147bbd0d8ed16eb13c, type: 3}
+  foodPrefab: {fileID: 1753512919736480276, guid: b57f97284c264aa4a8b84d126710333b, type: 3}
 --- !u!1 &1630122339
 GameObject:
   m_ObjectHideFlags: 0
@@ -4360,7 +4250,7 @@ GameObject:
   - component: {fileID: 2035788928}
   - component: {fileID: 2035788927}
   m_Layer: 5
-  m_Name: AppleButton
+  m_Name: FoodButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4429,7 +4319,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2035788928}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1597261764}
+        m_TargetAssemblyTypeName: ObjectSpawner, Assembly-CSharp
+        m_MethodName: SpawnFoodOnMouse
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2035788928
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4769,6 +4671,67 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2107649815}
   m_CullTransparentMesh: 1
+--- !u!1001 &2180155076012738965
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 199450308007197331, guid: 9952f0d1502f4b147bbd0d8ed16eb13c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 199450308007197331, guid: 9952f0d1502f4b147bbd0d8ed16eb13c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.226
+      objectReference: {fileID: 0}
+    - target: {fileID: 199450308007197331, guid: 9952f0d1502f4b147bbd0d8ed16eb13c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -1.51
+      objectReference: {fileID: 0}
+    - target: {fileID: 199450308007197331, guid: 9952f0d1502f4b147bbd0d8ed16eb13c, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.92387956
+      objectReference: {fileID: 0}
+    - target: {fileID: 199450308007197331, guid: 9952f0d1502f4b147bbd0d8ed16eb13c, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.38268343
+      objectReference: {fileID: 0}
+    - target: {fileID: 199450308007197331, guid: 9952f0d1502f4b147bbd0d8ed16eb13c, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 199450308007197331, guid: 9952f0d1502f4b147bbd0d8ed16eb13c, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 199450308007197331, guid: 9952f0d1502f4b147bbd0d8ed16eb13c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 45
+      objectReference: {fileID: 0}
+    - target: {fileID: 199450308007197331, guid: 9952f0d1502f4b147bbd0d8ed16eb13c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 199450308007197331, guid: 9952f0d1502f4b147bbd0d8ed16eb13c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3163475422794666799, guid: 9952f0d1502f4b147bbd0d8ed16eb13c, type: 3}
+      propertyPath: tilemap
+      value: 
+      objectReference: {fileID: 972152649}
+    - target: {fileID: 6517003414070354408, guid: 9952f0d1502f4b147bbd0d8ed16eb13c, type: 3}
+      propertyPath: m_Name
+      value: Ball
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 9952f0d1502f4b147bbd0d8ed16eb13c, type: 3}
 --- !u!1001 &8032237840452967903
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4779,7 +4742,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1753512919736480276, guid: b57f97284c264aa4a8b84d126710333b, type: 3}
       propertyPath: m_Name
-      value: Apple
+      value: Food
       objectReference: {fileID: 0}
     - target: {fileID: 1753512919736480276, guid: b57f97284c264aa4a8b84d126710333b, type: 3}
       propertyPath: m_IsActive
@@ -4845,5 +4808,5 @@ SceneRoots:
   - {fileID: 8032237840452967903}
   - {fileID: 1394608638}
   - {fileID: 1661846570}
-  - {fileID: 1411862906}
   - {fileID: 1597261763}
+  - {fileID: 2180155076012738965}

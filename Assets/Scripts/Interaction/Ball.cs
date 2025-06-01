@@ -8,6 +8,11 @@ public class Ball : BallInteractable
     private Vector3 _currentDestination;
     public Tilemap tilemap;
 
+    private void Start()
+    {
+        _currentDestination = transform.position;
+    }
+
     private void Update()
     {
         if (Vector3.Distance(_currentDestination, transform.position) > 0.1f)
