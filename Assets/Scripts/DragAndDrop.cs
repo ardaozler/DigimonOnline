@@ -4,7 +4,6 @@ public class DragAndDrop : MonoBehaviour
 {
     private Vector3 _offset;
     private float _fixedY;
-    
     private Vector3 _originalScale;
 
     private void OnMouseDown()
@@ -16,12 +15,14 @@ public class DragAndDrop : MonoBehaviour
         );
 
         _offset = transform.position - mouseWorldPoint;
+        _originalScale = transform.localScale;
+        transform.localScale = _originalScale * 1.2f;
+
     }
 
     
     private void OnMouseUp()
     {
-        // Reset scale
         transform.localScale = _originalScale;
     }
     private void OnMouseDrag()
