@@ -102,8 +102,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69e2a5bea1174bff97d0e838fa2a6cdf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 10
+  speed: 5
+  gravity: 9.8
+  maxFallSpeed: 20
   tilemap: {fileID: 0}
+  isFalling: 0
 --- !u!114 &7300384914089794049
 MonoBehaviour:
   m_ObjectHideFlags: 0

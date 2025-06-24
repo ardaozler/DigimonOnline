@@ -7,6 +7,7 @@ public class DragAndDrop : MonoBehaviour
     public static readonly float FixedY = 1.226f;
     private Vector3 _originalScale;
     private bool _forceDrag = false;
+    public Action OnDragEnd;
 
     private void OnMouseDown()
     {
@@ -34,6 +35,7 @@ public class DragAndDrop : MonoBehaviour
     {
         transform.localScale = _originalScale;
         _forceDrag = false;
+        OnDragEnd?.Invoke();
     }
 
     private void OnMouseDrag()
