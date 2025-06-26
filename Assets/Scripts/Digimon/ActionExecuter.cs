@@ -8,6 +8,13 @@ public class ActionExecutor : MonoBehaviour
 
     public void Enqueue(DigimonAction action, ActContext context)
     {
+        if (PeekNext().Item1 == (action))
+        {
+            Debug.LogWarning("Action already in queue: " + action.GetType().Name + "" +
+                             "\n Dequeue it first before adding again.");
+            DequeueAction(action);
+        }
+
         DebugActQueueUI.Instance.AddActionText(action.GetType().Name);
         _queue.Enqueue((action, context));
     }
@@ -17,11 +24,14 @@ public class ActionExecutor : MonoBehaviour
         if (_queue.Count == 0) return false;
 
         var (action, context) = _queue.Peek();
-        return action.Act(context, () =>
-        {
-            DebugActQueueUI.Instance.RemoveLastActionText();
-            _queue.Dequeue();
-        });
+        return action.Act(context, () => { DequeueAction(action); });
+    }
+
+    private void DequeueAction(DigimonAction action)
+    {
+        DebugActQueueUI.Instance.RemoveLastActionText();
+        _queue.Dequeue();
+        Debug.Log("dequeued action: " + action.GetType().Name);
     }
 
     public (DigimonAction, ActContext) PeekNext()

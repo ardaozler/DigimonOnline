@@ -88,7 +88,7 @@ public class Ball : BallInteractable
             Gizmos.color = Color.red;
             Vector3Int targetCell = tilemap.WorldToCell(_targetPosition);
             Vector3 targetCellCenter = tilemap.GetCellCenterWorld(targetCell);
-            Gizmos.DrawWireSphere(targetCellCenter, 1);
+            Gizmos.DrawWireCube(targetCellCenter, new Vector3(1, 1, 0));
         }
     }
 }

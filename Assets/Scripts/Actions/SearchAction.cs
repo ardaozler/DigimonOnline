@@ -16,15 +16,15 @@ public class SearchAction : DigimonAction
         var mover = agent.GetComponent<DigimonMover>();
         if (mover == null) return false;
 
-        GameObject[] foodItems = GameObject.FindGameObjectsWithTag(context.SearchTag);
-        if (foodItems.Length == 0) return false;
+        GameObject[] searchItems = GameObject.FindGameObjectsWithTag(context.SearchTag);
+        if (searchItems.Length == 0) return false;
 
         // Find the closest one
         GameObject nearest = null;
         float minDistance = float.MaxValue;
         Vector3 agentPos = agent.transform.position;
 
-        foreach (var item in foodItems)
+        foreach (var item in searchItems)
         {
             float dist = Vector3.Distance(agentPos, item.transform.position);
             if (dist < minDistance)
@@ -55,11 +55,9 @@ public class SearchAction : DigimonAction
                     DigimonInteractable.INTERACTABLE_RADIUS)
                 {
                     executor.Enqueue(new SearchAction(), new SearchContext(agent, context.SearchTag));
-                    Debug.Log("moveto ended and search is queued");
                 }
                 else
                 {
-                    Debug.Log("moveto ended and interact is queued");
                     executor.Enqueue(new InteractWithTarget(),
                         new GenericInteractContext(interactable, interactContext));
                 }
