@@ -17,11 +17,10 @@ public class ObjectSpawner : MonoBehaviour
 
     private Vector3 GetMouseWorldPoint()
     {
-
         Vector3 mouseWorldPoint = Camera.main.ScreenToWorldPoint(
             new Vector3(Input.mousePosition.x, Input.mousePosition.y, zDepth)
         );
-        
+
         mouseWorldPoint.y = DragAndDrop.FixedY;
         return mouseWorldPoint;
     }
@@ -34,7 +33,8 @@ public class ObjectSpawner : MonoBehaviour
             return;
         }
 
-        GameObject ball = Instantiate(ballPrefab, position, Quaternion.identity);
+        GameObject ball = Instantiate(ballPrefab, position, ballPrefab.transform.rotation);
+
         ball.GetComponent<Ball>().tilemap = tilemap;
         DragAndDrop dragAndDrop = ball.GetComponent<DragAndDrop>();
         dragAndDrop.StartDragExternally();
