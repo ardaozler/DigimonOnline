@@ -11,6 +11,6 @@ public class InteractWithTarget : DigimonAction
             return false;
         }
 
-        return context.Target.Interact(context.Context, onActionCompleted);
+        return context.Target.Interact(context.Context, onActionCompleted = null);
     }
 }
