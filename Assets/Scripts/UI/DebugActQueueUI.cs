@@ -3,14 +3,16 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class DebugActQueueUI : MonoBehaviour 
+public class DebugActQueueUI : MonoBehaviour
 {
-    
     public static DebugActQueueUI Instance;
-    
+
+    public TextMeshProUGUI queueCountText;
+
     public TextMeshProUGUI actTextPrefab;
     public GameObject actsContainer;
     public Queue<TextMeshProUGUI> actTexts = new Queue<TextMeshProUGUI>();
+
     private void Start()
     {
         if (Instance == null)
@@ -22,13 +24,19 @@ public class DebugActQueueUI : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    private void Update()
+    {
+        queueCountText.text = actTexts.Count + "";
+    }
+
     public void AddActionText(string text)
     {
         var actText = Instantiate(actTextPrefab, actsContainer.transform);
         actText.text = text;
         actTexts.Enqueue(actText);
     }
-    
+
     public void ClearActions()
     {
         while (actTexts.Count > 0)
@@ -37,7 +45,7 @@ public class DebugActQueueUI : MonoBehaviour
             Destroy(actText.gameObject);
         }
     }
-    
+
     public void RemoveLastActionText()
     {
         if (actTexts.Count > 0)
@@ -46,6 +54,4 @@ public class DebugActQueueUI : MonoBehaviour
             Destroy(actText.gameObject);
         }
     }
-    
-    
 }
