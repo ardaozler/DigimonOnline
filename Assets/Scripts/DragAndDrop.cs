@@ -56,6 +56,8 @@ public class DragAndDrop : MonoBehaviour
 
             if (Input.touchCount == 0 && !Input.GetMouseButton(0))
             {
+                //force on mouse up
+                OnMouseUp();
                 transform.localScale = _originalScale;
                 _forceDrag = false;
             }
