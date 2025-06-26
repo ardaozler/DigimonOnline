@@ -7,8 +7,14 @@ public class DigimonStatsUI : MonoBehaviour
 {
     [SerializeField] private TMP_Text nameText;
     [SerializeField] private Slider hungerSlider;
+    [SerializeField] private TMP_Text hungerRate;
     [SerializeField] private Slider cleanlinessSlider;
+    [SerializeField] private TMP_Text cleanlinessRate;
     [SerializeField] private Slider happinessSlider;
+    [SerializeField] private TMP_Text happinessRate;
+    [SerializeField] private GameObject statsPanelParent;
+
+
     private DigimonStats _stats;
 
     private void Start()
@@ -19,9 +25,23 @@ public class DigimonStatsUI : MonoBehaviour
     public void DisplayStats(DigimonStats stats)
     {
         nameText.text = stats.gameObject.name;
+        hungerRate.text = $"-{stats.hungerTickSpeed:F2}/s";
+        cleanlinessRate.text = $"-{stats.cleanlinessTickSpeed:F2}/s";
+        happinessRate.text = $"-{stats.happinessTickSpeed:F2}/s";
         _stats = stats;
-        gameObject.SetActive(true);
+
+        UpdateStats();
+        statsPanelParent.SetActive(true);
+
+        Invoke(nameof(HideStats), 5f);
     }
+
+    private void HideStats()
+    {
+        statsPanelParent.SetActive(false);
+        _stats = null;
+    }
+
 
     public void UpdateStats()
     {
@@ -30,11 +50,5 @@ public class DigimonStatsUI : MonoBehaviour
         hungerSlider.value = _stats.Hunger / 100f;
         cleanlinessSlider.value = _stats.Cleanliness / 100f;
         happinessSlider.value = _stats.Happiness / 100f;
-    }
-
-    public void Hide()
-    {
-        gameObject.SetActive(false);
-        _stats = null;
     }
 }
