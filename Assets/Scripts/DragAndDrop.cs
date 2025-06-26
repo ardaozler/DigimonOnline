@@ -40,7 +40,7 @@ public class DragAndDrop : MonoBehaviour
 
     private void OnMouseDrag()
     {
-        if (!_forceDrag && !Input.GetMouseButton(0))
+        if (_forceDrag || !Input.GetMouseButton(0))
             return;
         Move();
     }
@@ -49,11 +49,9 @@ public class DragAndDrop : MonoBehaviour
     {
         if (_forceDrag)
         {
-            Vector3 inputPosition = Input.touchCount > 0 ? (Vector3)Input.GetTouch(0).position : Input.mousePosition;
-
             if (Input.touchCount > 0 || Input.GetMouseButton(0))
             {
-                Move(inputPosition);
+                Move();
             }
 
             if (Input.touchCount == 0 && !Input.GetMouseButton(0))
