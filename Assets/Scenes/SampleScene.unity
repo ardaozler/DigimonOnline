@@ -4386,6 +4386,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07970cddb87da804b9c6fe56753a5d1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  eggPrefab: {fileID: 0}
   ballPrefab: {fileID: 6517003414070354408, guid: 9952f0d1502f4b147bbd0d8ed16eb13c, type: 3}
   foodPrefab: {fileID: 1753512919736480276, guid: b57f97284c264aa4a8b84d126710333b, type: 3}
   tilemap: {fileID: 972152649}

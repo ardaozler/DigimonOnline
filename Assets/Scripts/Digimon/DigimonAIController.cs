@@ -9,14 +9,18 @@ public class DigimonAIController : MonoBehaviour
     private Urge _content = new Urge("Content", 0f);
     private float _timer;
 
-    public float minDecisionWait = 1f;
-    public float maxDecisionWait = 5f;
+    private float minDecisionWait = 1f;
+    private float maxDecisionWait = 5f;
 
     private void Start()
     {
         _stats = GetComponent<DigimonStats>();
         _executor = GetComponent<ActionExecutor>();
         _stats.InitializeUrges(gameObject);
+        //randomize decision times
+        minDecisionWait = Random.Range(1f, 5f);
+        maxDecisionWait = Random.Range(5f, 10f);
+        
         InvokeRepeating(nameof(UpdatePrimaryUrge), 0, 0.5f);
     }
 

@@ -19,9 +19,12 @@ public class DigimonStats : MonoBehaviour
 
     public void InitializeUrges(GameObject owner)
     {
+        //randomize stats
         hungerTickSpeed = Random.Range(0.5f, 2f);
         cleanlinessTickSpeed = Random.Range(0.5f, 2f);
         happinessTickSpeed = Random.Range(5f, 5f);
+        
+        
         _hunger = new Urge("Hunger", hungerTickSpeed, 
             (new SearchAction(), () => new SearchContext(owner, "Food")));
         _cleanliness = new Urge("Cleanliness", cleanlinessTickSpeed,

@@ -1,9 +1,9 @@
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.Tilemaps;
 
 public class ObjectSpawner : MonoBehaviour
 {
+    public GameObject eggPrefab;
     public GameObject ballPrefab;
     public GameObject foodPrefab;
     public Tilemap tilemap;
@@ -58,5 +58,19 @@ public class ObjectSpawner : MonoBehaviour
         DragAndDrop dragAndDrop = food.GetComponent<DragAndDrop>();
         dragAndDrop.StartDragExternally();
         food.name = "Food";
+    }
+
+    public void SpawnEggInTheMiddle()
+    {
+        if (eggPrefab == null)
+        {
+            Debug.LogError("Egg prefab is not assigned.");
+            return;
+        }
+
+
+        Egg egg = Instantiate(eggPrefab, new Vector3(1, 1, -5), eggPrefab.transform.rotation).GetComponent<Egg>();
+
+        egg.StartHatching(tilemap);
     }
 }
