@@ -66,5 +66,4 @@ public class DigimonMover : MonoBehaviour
 
         return true;
     }
-
 }

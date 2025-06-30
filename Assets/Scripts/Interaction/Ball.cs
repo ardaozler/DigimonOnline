@@ -27,13 +27,13 @@ public class Ball : BallInteractable
     {
         HandleFalling();
 
-        if (!_isFalling && Vector3.Distance(transform.position, _targetPosition) > 0.01f)
+        if (Vector3.Distance(transform.position, _targetPosition) > 0.01f || _isFalling)
         {
             transform.position = Vector3.Lerp(transform.position, _targetPosition, speed * Time.deltaTime);
-        }
-        else if (_isFalling)
-        {
-            transform.position += Vector3.down * (_verticalVelocity * Time.deltaTime);
+            if (_isFalling)
+            {
+                _targetPosition += Vector3.down * (_verticalVelocity * Time.deltaTime);
+            }
         }
     }
 

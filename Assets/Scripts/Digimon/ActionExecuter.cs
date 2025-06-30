@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ActionExecutor : MonoBehaviour
 {
-    private readonly Queue<(DigimonAction, ActContext)> _queue = new();
+    public Queue<(DigimonAction, ActContext)> _queue = new();
 
     public void Enqueue(DigimonAction action, ActContext context)
     {
@@ -15,7 +15,6 @@ public class ActionExecutor : MonoBehaviour
             DequeueAction(action);
         }
 
-        DebugActQueueUI.Instance.AddActionText(action.GetType().Name);
         _queue.Enqueue((action, context));
     }
 
@@ -24,12 +23,15 @@ public class ActionExecutor : MonoBehaviour
         if (_queue.Count == 0) return false;
 
         var (action, context) = _queue.Peek();
-        return action.Act(context, () => { DequeueAction(action); });
+        bool isActing = action.Act(context, () => { DequeueAction(action); });
+        
+        if (!isActing) DequeueAction(action);
+        
+        return isActing;
     }
 
     private void DequeueAction(DigimonAction action)
     {
-        DebugActQueueUI.Instance.RemoveLastActionText();
         _queue.Dequeue();
         Debug.Log("dequeued action: " + action.GetType().Name);
     }

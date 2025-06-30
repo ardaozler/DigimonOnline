@@ -33,7 +33,7 @@ public class DigimonStatsUI : MonoBehaviour
         UpdateStats();
         statsPanelParent.SetActive(true);
 
-        Invoke(nameof(HideStats), 5f);
+        //Invoke(nameof(HideStats), 10f);
     }
 
     private void HideStats()

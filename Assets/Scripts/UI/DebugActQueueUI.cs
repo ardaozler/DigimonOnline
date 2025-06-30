@@ -13,6 +13,8 @@ public class DebugActQueueUI : MonoBehaviour
     public GameObject actsContainer;
     public Queue<TextMeshProUGUI> actTexts = new Queue<TextMeshProUGUI>();
 
+    private Queue<(DigimonAction, ActContext)> _actionQueue = new Queue<(DigimonAction, ActContext)>();
+
     private void Start()
     {
         if (Instance == null)
@@ -22,6 +24,24 @@ public class DebugActQueueUI : MonoBehaviour
         else
         {
             Destroy(gameObject);
+        }
+
+        InvokeRepeating(nameof(UpdateActionsList), 0, 0.2f);
+    }
+
+    private void UpdateActionsList()
+    {
+        ClearActions();
+
+        if (_actionQueue.Count == 0)
+        {
+            AddActionText("No actions in queue.");
+            return;
+        }
+
+        foreach (var (action, context) in _actionQueue)
+        {
+            AddActionText($"{action.GetType().Name} - {context}");
         }
     }
 
@@ -53,5 +73,11 @@ public class DebugActQueueUI : MonoBehaviour
             var actText = actTexts.Dequeue();
             Destroy(actText.gameObject);
         }
+    }
+
+    public void DisplayActionQueue(ref Queue<(DigimonAction, ActContext)> queue)
+    {
+        ClearActions();
+        _actionQueue = queue;
     }
 }

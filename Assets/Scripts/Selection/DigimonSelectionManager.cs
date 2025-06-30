@@ -14,5 +14,6 @@ public class DigimonSelectionManager : MonoBehaviour
     public void Select(DigimonStats stats)
     {
         statsUI.DisplayStats(stats);
+        DebugActQueueUI.Instance.DisplayActionQueue(ref stats.GetComponent<ActionExecutor>()._queue);
     }
 }
