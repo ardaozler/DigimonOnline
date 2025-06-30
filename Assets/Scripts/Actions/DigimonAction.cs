@@ -8,6 +8,7 @@ public abstract class DigimonAction
     public virtual bool Act(ActContext actContext, Action onActionCompleted)
     {
         Debug.Log(actContext + " acted");
+        onActionCompleted?.Invoke();
         return true;
     }
 }
